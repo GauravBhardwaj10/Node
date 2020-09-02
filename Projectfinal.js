@@ -43,3 +43,20 @@ app.post('/register/',(req,res,next)=>{
         }
  });
 });
+ app.post("/login/",(req,res,next)=>{
+        var data =req.body;
+
+        var email=data.email;
+        var password=data.password;
+
+        connection.query("SELECT * FROM login_info WHERE email = ?",[email],(err,result,fields)=>{
+            connection.on('error',(err)=>{
+            console.log("[MYSQL ERROR]",err);
+
+        });
+        if(result && result.length){
+            console.log(result);
+
+            if (password == result[0].password){
+                res.json("user logged in !!");
+                res.end;

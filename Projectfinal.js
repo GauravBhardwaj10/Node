@@ -25,6 +25,21 @@ app.post('/register/',(req,res,next)=>{
         connection.on('error',(err)=>{
             console.log("[MYSQL ERROR]",err);
 
-        });
-    });
+        });if(result && result.length){
+            res.json("user already exists");
+        }
+        else{
+            var insert_cmd ="INSERT INTO login_info(user,email,password,phonenumber,DOB) values(?,?,?,?,?)";
+            values=[user,email,password,phonenumber,DOB];
+            console.log("executing: "+insert_cmd); 
+            connection.query(insert_cmd,values,(err,results,fields)=>{
+              connection.on('error',(err)=>{
+                  console.log('[MYSQL ERROR]',err);
+              });
+              res.json("Registered!!"); 
+              console.log("registration successfull !!");
+
+            });
+        }
+ });
 });

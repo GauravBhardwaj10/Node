@@ -53,10 +53,24 @@ app.post('/register/',(req,res,next)=>{
             connection.on('error',(err)=>{
             console.log("[MYSQL ERROR]",err);
 
-        });
-        if(result && result.length){
+        });        if(result && result.length){
             console.log(result);
 
             if (password == result[0].password){
                 res.json("user logged in !!");
                 res.end;
+
+            }else{
+                res.json("wrong password !!");
+                res.end;
+            }
+        }
+        else{
+            res.json("user not found !!");
+            res.end;
+
+var server =app.listen(3019,()=>{
+         console.log("server running at http://localhost:3019");
+
+
+});

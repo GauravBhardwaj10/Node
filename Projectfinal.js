@@ -25,7 +25,8 @@ app.post('/register/',(req,res,next)=>{
         connection.on('error',(err)=>{
             console.log("[MYSQL ERROR]",err);
 
-        });if(result && result.length){
+        });
+        if(result && result.length){
             res.json("user already exists");
         }
         else{
@@ -43,7 +44,7 @@ app.post('/register/',(req,res,next)=>{
         }
  });
 });
- app.post("/login/",(req,res,next)=>{
+     app.post("/login/",(req,res,next)=>{
         var data =req.body;
 
         var email=data.email;
@@ -53,7 +54,8 @@ app.post('/register/',(req,res,next)=>{
             connection.on('error',(err)=>{
             console.log("[MYSQL ERROR]",err);
 
-        });        if(result && result.length){
+        });
+        if(result && result.length){
             console.log(result);
 
             if (password == result[0].password){
@@ -68,6 +70,12 @@ app.post('/register/',(req,res,next)=>{
         else{
             res.json("user not found !!");
             res.end;
+
+        }
+    });
+
+     });
+
 
 var server =app.listen(3019,()=>{
          console.log("server running at http://localhost:3019");
